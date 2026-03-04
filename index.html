@@ -1,28 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>LCB2025007</title>
+    <title>LCB2025007 Webpage</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 100px;
+            background-color: white;
+            padding: 30px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hello FOSS!</h1>
-    <p>this is my simple web page.</p>
 
-<script>
-  /*
-    Simple auth check using localStorage
-    (Later this can be replaced with real auth)
-  */
+    <div class="container">
+        <h1>Welcome to My Webpage 🎉</h1>
+        <p>Roll Number: LCB2025007</p>
+        <p>This is a styled HTML page.</p>
 
-  const isLoggedIn = localStorage.getItem("gumasto_logged_in");
+        <button onclick="showMessage()">Click Me</button>
+    </div>
 
-  // 🔒 strict check
-  if (isLoggedIn && isLoggedIn === "true") {
-    window.location.replace("dashboard.html");
-  } else {
-    window.location.replace("auth/login.html");
-  }
-</script>
+    <script>
+        function showMessage() {
+            alert("Hello LCB2025007! 🎨");
+        }
+    </script>
 
 </body>
 </html>
