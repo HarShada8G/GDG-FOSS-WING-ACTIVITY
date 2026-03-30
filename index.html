@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Mastery Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#020617;color:#fff}
+header{padding:20px;text-align:center;font-size:30px;font-weight:600;background:#020617;position:sticky;top:0;z-index:100}
+.container{max-width:1100px;margin:auto;padding:20px}
+.card{background:#0f172a;padding:25px;margin:20px 0;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.5);transition:.5s;opacity:0;transform:translateY(40px)}
+.card.show{opacity:1;transform:translateY(0)}
+.card:hover{transform:scale(1.04)}
+h2{color:#38bdf8;margin-bottom:10px}
+pre{background:#020617;padding:15px;border-radius:10px}
+.terminal{background:#000;padding:20px;border-radius:10px;margin-top:10px}
+input{width:100%;padding:10px;margin-top:10px;border-radius:8px;border:none}
+button{margin-top:10px;padding:10px 15px;border:none;border-radius:8px;background:#38bdf8;cursor:pointer}
+button:hover{background:#0ea5e9}
+.progress{position:fixed;top:0;left:0;height:5px;background:#38bdf8;width:0%}
+.branch{display:flex;gap:10px;margin-top:10px}
+.node{padding:10px 15px;border-radius:20px;background:#38bdf8}
+.line{width:50px;height:2px;background:#fff;margin-top:15px}
+.chatbox{background:#0f172a;padding:15px;border-radius:10px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="progress" id="progressBar"></div>
+
+<div class="progress" id="progressBar"></div>
+<header>🚀 Git & GitHub Learning Hub</header>
+
+<section>
+<div class="card">
+<h2>1. Git Init</h2>
+<p>Initialize your project</p>
+<pre>git init</pre>
+</div>
+
+<div class="card">
+<h2>2. Add Files</h2>
+<pre>git add .</pre>
+</div>
+
+<div class="card">
+<h2>3. Commit</h2>
+<pre>git commit -m "your message"</pre>
+</div>
+
+<div class="card">
+<h2>4. Push Code</h2>
+<pre>git push origin main</pre>
+</div>
+
+<div class="card">
+<h2>5. Pull Changes</h2>
+<pre>git pull origin main</pre>
+</div>
+
+<div class="card">
+<h2>6. Create PR</h2>
+<p>Push branch then create Pull Request on GitHub UI</p>
+<pre>git checkout -b feature
+ git push origin feature</pre>
+</div>
+
+<div class="card">
+<h2>7. CI/CD Basics</h2>
+<p>Automate build & deployment</p>
+<pre>.github/workflows/main.yml</pre>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h2>Interactive Terminal</h2>
+<div class="terminal" id="terminalOutput">Type git commands below...</div>
+<input id="commandInput" placeholder="Type command e.g. git init">
+<button onclick="runCommand()">Run</button>
+</div>
+
+<div class="card">
+<h2>Git Workflow Visualizer</h2>
+<div class="branch">
+<div class="node">main</div>
+<div class="line"></div>
+<div class="node">feature</div>
+</div>
+<p>Branches show how features are developed separately.</p>
+</div>
+
+<div class="card">
+<h2>Progress Tracker</h2>
+<canvas id="progressChart"></canvas>
+</div>
+
+<div class="card">
+<h2>Pull Request Flow</h2>
+<pre>
+1. git checkout -b feature
+2. git status
+3. git add .
+4. git commit -m "msg"
+5. git push origin feature
+6. Create PR on GitHub
+</pre>
+</div>
+
+<div class="card">
+<h2>Mini AI Assistant 🤖</h2>
+<div class="chatbox" id="chatbox">Ask about Git...</div>
+<input id="chatInput" placeholder="Ask something...">
+<button onclick="chatAI()">Ask</button>
+</div>
+
+</div>
+
+<script>
+const cards=document.querySelectorAll('.card');
+window.addEventListener('scroll',()=>{
+ let trigger=window.innerHeight*0.8;
+ cards.forEach(card=>{
+  let top=card.getBoundingClientRect().top;
+  if(top<trigger){card.classList.add('show');}
+ });
+ let scrollTop=document.documentElement.scrollTop;
+ let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+ document.getElementById('progressBar').style.width=(scrollTop/height)*100+'%';
+});
+
+function runCommand(){
+ let input=document.getElementById('commandInput').value;
+ let output=document.getElementById('terminalOutput');
+ if(input==='git init') output.innerHTML+='\n✔ Repo initialized\n';
+ else if(input==='git add .') output.innerHTML+='\n✔ Files added\n';
+ else if(input.startsWith('git commit')) output.innerHTML+='\n✔ Changes committed\n';
+ else if(input==='git push') output.innerHTML+='\n✔ Code pushed';
+ else if(input==='git status') output.innerHTML+='\n✔status of repository \n'
+ else output.innerHTML+='\n❌ Unknown command\n';
+}
+
+const ctx=document.getElementById('progressChart');
+new Chart(ctx,{type:'bar',data:{labels:['Init','Add','Commit','Push'],datasets:[{label:'Progress',data:[1,1,1,0]}]}});
+
+function chatAI(){
+ let input=document.getElementById('chatInput').value.toLowerCase();
+ let box=document.getElementById('chatbox');
+ if(input.includes('push')) box.innerHTML='Use git push origin branch-name';
+ else if(input.includes('pull')) box.innerHTML='Use git pull origin main';
+ else box.innerHTML='Try asking about commit, push, pull';
+}
+</script>
+</body>
+</html>
